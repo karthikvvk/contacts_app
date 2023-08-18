@@ -3,7 +3,7 @@ This is program is a "Contacts Book"  made using "tkinter"  module of "python".
 It uses python (Front-end) and MYSQL (Back-end).
 
 Advantages:
-1. Uses local database and text files to store contacts and application settings. 
+1. Uses local database and text files to store contacts and application settings.
 2. Sharing of contacts is possible through text files.
 3. User can have "seperate password" for each accounts.
 4. Contacts can be backed-up in MYSQL itself(automaticly).
@@ -26,11 +26,12 @@ from datetime import date
 import os, runpy
 from tkinter import *
 from tkinter import ttk as vvk
+import urllib.request
 
 try:
     import mysql.connector
 except:
-    os.system('cmd /c "pip install mysql.connector-python"')
+    os.system('cmd /c "pip install mysql.connector-python" > NUL')
     import mysql.connector
 
 root_dir = os.getcwd()
@@ -41,9 +42,8 @@ for hi in req_mods:
         pass
     else:
         os.mkdir(hi)
-    open(f"{root_dir}\\{hi}\\{req_mods[hi]}.py", 'w').close()
     open(f"{root_dir}\\{hi}\\__init__.py", 'w').close()
-    os.system(f"curl -o {root_dir}\\{hi}\\{req_mods[hi]}.py {req_mods_lnk[hi]}")
+    urllib.request.urlretrieve(req_mods_lnk[hi], f"{root_dir}\\{hi}\\{req_mods[hi]}.py")
 from oopen import openeasy as op
 
 theme = '#323232'
